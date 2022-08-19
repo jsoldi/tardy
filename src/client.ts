@@ -39,7 +39,7 @@ export class TardyClient {
     }
 
     entitle(name?: string | null): TardyClient {
-        return this.copy({ log: msg => this.base.log(`${name}${name && msg ? TardyClient.separator : ''}${msg}`) });
+        return this.copy({ log: msg => this.base.log(`${name ?? ''}${name && msg ? TardyClient.separator : ''}${msg ?? ''}`) });
     }
 
     distribute<N extends number[]>(...ratios: N): { [i in keyof N]: TardyClient } {
