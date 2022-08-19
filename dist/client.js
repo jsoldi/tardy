@@ -22,7 +22,7 @@ export class TardyClient {
         return this.transform(max - min, min);
     }
     entitle(name) {
-        return this.copy({ log: msg => this.base.log(`${name}${name && msg ? TardyClient.separator : ''}${msg}`) });
+        return this.copy({ log: msg => this.base.log(`${name ?? ''}${name && msg ? TardyClient.separator : ''}${msg ?? ''}`) });
     }
     distribute(...ratios) {
         const totalRatio = ratios.reduce((a, b) => a + b, 0);

@@ -1,14 +1,15 @@
 {
   "type": "module",
   "name": "tardy",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "",
   "main": "./dist/index.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "test": "npx tsc && node ./dist/demo.js"
+    "test": "npx tsc && node ./dist/demo.js",
+    "build": "npx tsc"
   },
   "author": "Juan Soldi",
   "license": "ISC",
