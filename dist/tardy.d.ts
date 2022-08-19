@@ -1,4 +1,4 @@
-import { ITardyClient, TardyClient } from "./client.js";
+import { IBarTardyClientOptions, ITardyClientOptions, TardyClient } from "./internal.js";
 declare type Awaitable<T> = T | Promise<T>;
 export declare class Tardy<out T> {
     readonly run: (client: TardyClient) => Promise<T>;
@@ -15,6 +15,6 @@ export declare class Tardy<out T> {
     log(msg: string): Tardy<T>;
     map<U>(f: (value: T) => U): Tardy<U>;
     report(title?: string | null, min?: number, max?: number): Tardy<T>;
-    exec(mode?: ITardyClient | 'cli' | 'silent' | 'plain'): Promise<T>;
+    exec(options?: Partial<ITardyClientOptions & IBarTardyClientOptions>): Promise<T>;
 }
 export {};

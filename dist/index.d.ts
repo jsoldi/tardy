@@ -1,2 +1,1 @@
-export { Tardy } from "./tardy.js";
-export { ITardyClient, TardyClient, CliTardyClient } from './client.js';
+export { Tardy, ITardyClient, TardyClient } from "./internal.js";

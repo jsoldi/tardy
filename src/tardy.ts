@@ -1,4 +1,4 @@
-import { ITardyClient, TardyClient } from "./client.js";
+import { IBarTardyClientOptions, ITardyClientOptions, TardyClient } from "./internal.js";
 
 type Awaitable<T> = T | Promise<T>;
 
@@ -74,8 +74,8 @@ export class Tardy<out T> {
         });
     }
 
-    async exec(mode: ITardyClient | 'cli' | 'silent' | 'plain' = 'cli') {
-        const client = TardyClient.create(mode);
+    async exec(options?: Partial<ITardyClientOptions & IBarTardyClientOptions>) {
+        const client = TardyClient.clients.bar(options);
 
         try {
             return await this.run(client);

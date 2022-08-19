@@ -1,4 +1,4 @@
-import { TardyClient } from "./client.js";
+import { TardyClient } from "./internal.js";
 export class Tardy {
     constructor(run) {
         this.run = run;
@@ -60,8 +60,8 @@ export class Tardy {
             }
         });
     }
-    async exec(mode = 'cli') {
-        const client = TardyClient.create(mode);
+    async exec(options) {
+        const client = TardyClient.clients.bar(options);
         try {
             return await this.run(client);
         }
