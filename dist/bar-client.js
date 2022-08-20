@@ -22,7 +22,7 @@ export class BarTardyClient {
         this.bar = BarTardyClient.createBar(this.options.format);
     }
     static createBar(format) {
-        return new cliProgress.SingleBar({ format, hideCursor: true, synchronousUpdate: true }, cliProgress.Presets.legacy);
+        return new cliProgress.SingleBar({ format, hideCursor: true }, cliProgress.Presets.shades_classic);
     }
     update(progress) {
         if (this.restart && progress === 0) {
