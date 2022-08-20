@@ -1,5 +1,5 @@
 import cliProgress from 'cli-progress';
-import { ITardyClient, ITardyClientOptions, TardyClient } from "./internal.js";
+import { ITardyClient } from "./internal.js";
 
 interface IBar {
     update(payload: object): void;
@@ -48,7 +48,7 @@ export class BarTardyClient implements ITardyClient {
     }
 
     private static createBar(format: string) {
-        return new cliProgress.SingleBar({ format }, cliProgress.Presets.shades_classic);   
+        return new cliProgress.SingleBar({ format, hideCursor: true }, cliProgress.Presets.shades_classic);   
     }
 
     update(progress: number) {
