@@ -37,7 +37,7 @@ export interface IBarTardyClientOptions {
 export class BarTardyClient implements ITardyClient {
     protected static readonly defaultOptions: IBarTardyClientOptions = { 
         multiline: true,
-        format: '{bar} {percentage}% | {log}'
+        format: '{bar} {percentage}% | {log} '
     }
 
     private readonly bar: IBar;

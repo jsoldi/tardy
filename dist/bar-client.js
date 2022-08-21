@@ -46,5 +46,5 @@ export class BarTardyClient {
 }
 BarTardyClient.defaultOptions = {
     multiline: true,
-    format: '{bar} {percentage}% | {log}'
+    format: '{bar} {percentage}% | {log} '
 };
