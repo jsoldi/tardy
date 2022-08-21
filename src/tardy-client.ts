@@ -62,14 +62,15 @@ export class TardyClient implements ITardyClient {
             return this.copy({
                 update: progress => {
                     item.progress = progress;
-                    let done = true; // To avoid weird float rounding issues
+                    let done = true; // To make sure we reach 1
+                    let total = 0;
 
-                    const value = items.map(item => {
-                        done &&= item.progress === 1;
-                        return item.progress * item.ratio;
-                    }).reduce((a, b) => a + b, 0) / totalRatio;
+                    for (let { progress, ratio } of items) {
+                        total += progress * ratio;
+                        done &&= progress === 1;
+                    }
 
-                    this.base.update(done ? 1 : value);
+                    this.base.update(done ? 1 : total / totalRatio);
                 }
             });
         }) as { [i in keyof N]: TardyClient };
