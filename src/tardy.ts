@@ -74,6 +74,19 @@ export class Tardy<out T> {
         });
     }
 
+    static reportCountdown(seconds: number, name: string = 'Countdown'): Tardy<void> {
+        return new Tardy(async client => {
+            for (let i = seconds; i > 0; i--) {
+                client.update(1 - i / seconds);
+                client.log(i.toString());
+                await new Promise(resolve => setTimeout(resolve, 1000));
+            }
+
+            client.log('0');
+        })
+        .report(name);
+    }
+
     async exec(options?: Partial<ITardyClientOptions & IBarTardyClientOptions>) {
         const client = TardyClient.clients.bar(options);
 

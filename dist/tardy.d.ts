@@ -15,6 +15,7 @@ export declare class Tardy<out T> {
     log(msg: string): Tardy<T>;
     map<U>(f: (value: T) => U): Tardy<U>;
     report(title?: string | null, min?: number, max?: number): Tardy<T>;
+    static reportCountdown(seconds: number, name?: string): Tardy<void>;
     exec(options?: Partial<ITardyClientOptions & IBarTardyClientOptions>): Promise<T>;
 }
 export {};

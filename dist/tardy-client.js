@@ -35,7 +35,7 @@ export class TardyClient {
             return this.copy({
                 update: progress => {
                     item.progress = progress;
-                    let done = true;
+                    let done = true; // To make sure we reach 1
                     let total = 0;
                     for (let { progress, ratio } of items) {
                         total += progress * ratio;
