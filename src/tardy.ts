@@ -9,12 +9,20 @@ export class Tardy<out T> {
         return new Tardy(async () => value);
     }
 
+    static get void(): Tardy<void> {
+        return new Tardy(async () => { });
+    }
+
     /**
      * This corresponds to calling an async function to create a promise.
      */
     static lift<A extends any[], T>(f: (this: TardyClient, ...args: A) => Promise<T>): (...args: A) => Tardy<T> {
         return (...args) => new Tardy(async client => await f.call(client, ...args));
     }
+
+    // static wrap<A extends any[], T>(f: (...args: [...A, TardyClient]) => Promise<T>): (...args: A) => Tardy<T> {
+    //     return (...args) => new Tardy(async client => await f(...args, client));
+    // }
 
     static get client(): Tardy<TardyClient> {
         return new Tardy(async client => client);
@@ -39,10 +47,10 @@ export class Tardy<out T> {
         })
     }
 
-    bind<U>(f: (value: T) => Awaitable<Tardy<U>>): Tardy<U> {
+    bind<U>(f: (value: T, client: TardyClient) => Awaitable<Tardy<U>>): Tardy<U> {
         return new Tardy(async client => {
             const value = await this.run(client);
-            const next = await f(value);
+            const next = await f(value, client);
             return await next.run(client);
         });
     }

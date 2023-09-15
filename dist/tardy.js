@@ -6,12 +6,18 @@ export class Tardy {
     static of(value) {
         return new Tardy(async () => value);
     }
+    static get void() {
+        return new Tardy(async () => { });
+    }
     /**
      * This corresponds to calling an async function to create a promise.
      */
     static lift(f) {
         return (...args) => new Tardy(async (client) => await f.call(client, ...args));
     }
+    // static wrap<A extends any[], T>(f: (...args: [...A, TardyClient]) => Promise<T>): (...args: A) => Tardy<T> {
+    //     return (...args) => new Tardy(async client => await f(...args, client));
+    // }
     static get client() {
         return new Tardy(async (client) => client);
     }
@@ -33,7 +39,7 @@ export class Tardy {
     bind(f) {
         return new Tardy(async (client) => {
             const value = await this.run(client);
-            const next = await f(value);
+            const next = await f(value, client);
             return await next.run(client);
         });
     }

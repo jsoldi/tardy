@@ -4,6 +4,7 @@ export declare class Tardy<out T> {
     readonly run: (client: TardyClient) => Promise<T>;
     constructor(run: (client: TardyClient) => Promise<T>);
     static of<T>(value: T): Tardy<T>;
+    static get void(): Tardy<void>;
     /**
      * This corresponds to calling an async function to create a promise.
      */
@@ -11,7 +12,7 @@ export declare class Tardy<out T> {
     static get client(): Tardy<TardyClient>;
     static all<T>(progresses: Tardy<T>[]): Tardy<T[]>;
     static seq<T>(progresses: Tardy<T>[]): Tardy<T[]>;
-    bind<U>(f: (value: T) => Awaitable<Tardy<U>>): Tardy<U>;
+    bind<U>(f: (value: T, client: TardyClient) => Awaitable<Tardy<U>>): Tardy<U>;
     log(msg: string): Tardy<T>;
     map<U>(f: (value: T) => U): Tardy<U>;
     report(title?: string | null, min?: number, max?: number): Tardy<T>;
